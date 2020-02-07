@@ -5,9 +5,9 @@
  */
 package Run;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import Models.Incidencia;
+import java.util.ArrayList;
+import static Run.Controller.*;
 
 /**
  *
@@ -15,40 +15,14 @@ import java.io.FileReader;
  */
 public class Run {
 
+    public static ArrayList<Incidencia> incidencias = new ArrayList<>();
+
     public static void main(String[] args) {
-        File f = null;
-        FileReader fr = null;
-        BufferedReader br = null;
-
-        File ruta = new File("Documents");
-        String fichero = "incidencias.txt";
-
-        try {
-            f = new File(ruta, fichero);
-            if (!f.exists()) {
-                System.out.println("No existe el fichero: " + fichero + " en la ruta: " + ruta.getPath());
-                System.exit(0);
-            }
-
-            fr = new FileReader(f);
-            br = new BufferedReader(fr);
-
-            String line;
-            while ((line = br.readLine()) != null) {
-                System.out.println(line);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (fr != null) {
-                    fr.close();
-                }
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
-        }
-
+        guardarDeFichero();
+        incidencias.forEach((incidencia) -> {
+            System.out.println(incidencia.toString());
+        });
+        
+        
     }
 }
