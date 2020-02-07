@@ -11,7 +11,6 @@ import java.util.*;
 /**
  * @author mfontana
  */
-
 public class EntradaDatos extends Exception {
 
     public static String pedirCadena(String texto) {
