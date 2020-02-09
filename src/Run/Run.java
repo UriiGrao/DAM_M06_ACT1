@@ -7,8 +7,6 @@ package Run;
 
 import Models.Incidencia;
 import java.util.ArrayList;
-import static Run.Controller.*;
-
 /**
  *
  * @author uriishii
@@ -18,11 +16,10 @@ public class Run {
     public static ArrayList<Incidencia> incidencias = new ArrayList<>();
 
     public static void main(String[] args) {
-        guardarDeFichero();
+        Traspaso.guardarDeFichero();
         incidencias.forEach((incidencia) -> {
             System.out.println(incidencia.toString());
         });
-        
         
     }
 }

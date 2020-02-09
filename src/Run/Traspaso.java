@@ -15,7 +15,7 @@ import java.io.FileReader;
  *
  * @author uriishii
  */
-public class Controller {
+public class Traspaso {
     public static void guardarDeFichero() {
         File f = null;
         FileReader fr = null;
