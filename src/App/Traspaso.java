@@ -3,20 +3,47 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Run;
+package App;
 
+import static App.Traspaso.incidencias;
 import Models.Incidencia;
-import static Run.Run.incidencias;
+import Models.Incidencias;
+import Utils.MiExcepcion;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 
 /**
  *
  * @author uriishii
  */
 public class Traspaso {
-    public static void guardarDeFichero() {
+
+    public static ArrayList<Incidencia> incidencias = new ArrayList<>();
+    public static Incidencias incidenciasXML = new Incidencias();
+
+    public static void main(String[] args) {
+
+        try {
+            leerFicheroTXT();
+            incidenciasXML.setIncidencias(incidencias);
+            guardarEnXML();
+            System.out.println("Se ha generado el XML sin problemas!");
+        } catch (MiExcepcion ex) {
+            System.out.println(ex.getMessage());
+        }
+
+    }
+
+    public static void leerFicheroTXT() throws MiExcepcion {
         File f = null;
         FileReader fr = null;
         BufferedReader br = null;
@@ -57,15 +84,29 @@ public class Traspaso {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new MiExcepcion("Error al Leer TXT: " + e.getMessage());
         } finally {
             try {
                 if (fr != null) {
                     fr.close();
                 }
             } catch (Exception e2) {
-                e2.printStackTrace();
             }
+        }
+    }
+
+    private static void guardarEnXML() throws MiExcepcion {
+        JAXBContext context = null;
+        try {
+            context = JAXBContext.newInstance(Incidencias.class);
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            marshaller.marshal(incidenciasXML, new FileWriter("Documents/incidencias.xml"));
+        } catch (JAXBException ex) {
+            throw new MiExcepcion("Error al escribir el fichero XML: " + ex.getMessage());
+        } catch (IOException ex) {
+            throw new MiExcepcion("Error al guardar el fichero XML: " + ex.getMessage());
+
         }
     }
 }

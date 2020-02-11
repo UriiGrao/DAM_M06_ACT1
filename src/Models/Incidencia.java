@@ -1,37 +1,42 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Models;
+
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * Clase de las incidencias
  *
  * @author uriishii
  */
+@XmlRootElement(name = "incidencia")
+@XmlType(propOrder = {"origen", "destino", "detalle", "tipo"})
 public class Incidencia {
 
-    String fecha;
+    String fechahora;
     String origen;
     String destino;
     String detalle;
     String tipo;
 
-    public Incidencia(String fecha, String origen, String destino, String detalle, String tipo) {
-        this.fecha = fecha;
+    public Incidencia() {
+    }
+
+    public Incidencia(String fechahora, String origen, String destino, String detalle, String tipo) {
+        this.fechahora = fechahora;
         this.origen = origen;
         this.destino = destino;
         this.detalle = detalle;
         this.tipo = tipo;
     }
 
+    @XmlAttribute(name = "fechahora")
     public String getFecha() {
-        return fecha;
+        return fechahora;
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+    public void setFecha(String fechahora) {
+        this.fechahora = fechahora;
     }
 
     public String getOrigen() {
@@ -68,7 +73,7 @@ public class Incidencia {
 
     @Override
     public String toString() {
-        return "fecha=" + fecha + ", origen=" + origen + ", destino=" + destino + ", detalle=" + detalle + ", tipo=" + tipo;
+        return "fecha=" + fechahora + ", origen=" + origen + ", destino=" + destino + ", detalle=" + detalle + ", tipo=" + tipo;
     }
 
 }
