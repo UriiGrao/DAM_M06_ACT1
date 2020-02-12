@@ -5,7 +5,6 @@
  */
 package App;
 
-import static App.Traspaso.incidencias;
 import Models.Incidencia;
 import Models.Incidencias;
 import Utils.MiExcepcion;
