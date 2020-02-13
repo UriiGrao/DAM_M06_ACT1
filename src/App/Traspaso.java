@@ -14,11 +14,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import static utils.Colors.printBlue;
+import static utils.Colors.printRed;
 
 /**
  *
@@ -35,9 +35,9 @@ public class Traspaso {
             leerFicheroTXT();
             incidenciasXML.setIncidencias(incidencias);
             guardarEnXML();
-            System.out.println("Se ha generado el XML sin problemas!");
+            printBlue("Se ha generado el XML sin problemas!");
         } catch (MiExcepcion ex) {
-            System.out.println(ex.getMessage());
+            printRed(ex.getMessage());
         }
 
     }
@@ -53,7 +53,7 @@ public class Traspaso {
         try {
             f = new File(ruta, fichero);
             if (!f.exists()) {
-                System.out.println("No existe el fichero: " + fichero + " en la ruta: " + ruta.getPath());
+                printRed("No existe el fichero: " + fichero + " en la ruta: " + ruta.getPath());
                 System.exit(0);
             }
 
